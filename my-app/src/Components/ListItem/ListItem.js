@@ -4,11 +4,15 @@ const ListItem = props => (
   <ul>
     <li
       style={{
-        display: "flex",
-        textDecoration: props.item.done ? "line-through" : "none"
+        display: "flex"
       }}
     >
-      <h1 onClick={() => props.taskDone(props.item)}>{props.item.title}</h1>
+      <h1
+        style={{ textDecoration: props.item.done ? "line-through" : "none" }}
+        onClick={() => props.taskDone(props.item)}
+      >
+        {props.item.title}
+      </h1>
       <h1 onClick={() => props.deleteItem(props.item)}>-Delete</h1>
     </li>
   </ul>

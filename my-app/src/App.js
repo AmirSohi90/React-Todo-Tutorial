@@ -25,14 +25,11 @@ class App extends Component {
     this.setState({ newItem });
   };
 
-  calculateId = () => {
-    const newId = this.state.tasks.reduce((acc, val) => {
-      // acc[0] = acc[0] === undefined || val.id < acc[0] ? val.id : acc[0];
+  calculateId = () =>
+    this.state.tasks.reduce((acc, val) => {
       acc = acc === undefined || val.id > acc ? val.id : acc;
       return acc;
-    }, []);
-    return newId + 1;
-  };
+    }, []) + 1;
 
   onSubmit = e => {
     e.preventDefault();
@@ -42,9 +39,7 @@ class App extends Component {
       id: this.calculateId()
     };
     const tasks = [...this.state.tasks, newTask];
-    this.setState({ tasks, newItem: { title: "" } }, () =>
-      console.log(this.state.tasks)
-    );
+    this.setState({ tasks, newItem: { title: "" } });
   };
 
   taskDone = item => {
