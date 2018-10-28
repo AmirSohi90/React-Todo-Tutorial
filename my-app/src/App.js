@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import "./App.css";
 import ListItem from "./Components/ListItem/ListItem";
+import Form from "./Components/Form/Form";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       tasks: [
-        { title: "This", done: false, id: 1 },
-        { title: "That", done: false, id: 2 },
-        { title: "Something", done: false, id: 3 },
-        { title: "Who?", done: false, id: 4 },
-        { title: "What?!", done: false, id: 5 }
+        { title: "Learn React", done: false, id: 1 },
+        { title: "Show off new React skills", done: false, id: 2 },
+        { title: "Put on cape", done: false, id: 3 },
+        { title: "Fly around", done: false, id: 4 },
+        { title: "Get arrested", done: false, id: 5 }
       ],
       newItem: { title: "" }
     };
@@ -60,16 +61,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="header">
-          <form onSubmit={e => this.onSubmit(e)}>
-            <input placeholder="Task" onChange={this.onInput} />
-            <button type="submit"> Add Task </button>
-          </form>
+          <Form onSubmit={this.onSubmit} onInput={this.onInput} />
           {this.state.tasks.map(item => (
             <ListItem
               key={item.id}
               deleteItem={this.deleteItem}
-              onInput={this.onInput}
-              onSubmit={this.onSubmit}
               taskDone={this.taskDone}
               item={item}
             />

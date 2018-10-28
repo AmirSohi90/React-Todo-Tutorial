@@ -1,16 +1,16 @@
 import React from "react";
 
 const ListItem = props => (
-  <div style={{ display: "flex" }}>
-    <h1
-      onClick={() => props.taskDone(props.item)}
+  <ul>
+    <li
       style={{
+        display: "flex",
         textDecoration: props.item.done ? "line-through" : "none"
       }}
     >
-      {props.item.title}
-    </h1>
-    <h1 onClick={() => props.deleteItem(props.item)}> x </h1>
-  </div>
+      <h1 onClick={() => props.taskDone(props.item)}>{props.item.title}</h1>
+      <h1 onClick={() => props.deleteItem(props.item)}> x </h1>
+    </li>
+  </ul>
 );
 export default ListItem;
