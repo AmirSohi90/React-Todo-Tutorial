@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import ListItem from "./Components/ListItem/ListItem";
 
 class App extends Component {
   constructor() {
@@ -51,7 +52,6 @@ class App extends Component {
   };
 
   deleteItem = item => {
-    console.log("CLICKED");
     const filtered = this.state.tasks.filter(task => task.id !== item.id);
     this.setState({ tasks: filtered });
   };
@@ -64,21 +64,16 @@ class App extends Component {
             <input placeholder="Task" onChange={this.onInput} />
             <button type="submit"> Add Task </button>
           </form>
-          {this.state.tasks.map(item => {
-            return (
-              <div key={item.id} style={{ display: "flex" }}>
-                <h1
-                  onClick={() => this.taskDone(item)}
-                  style={{
-                    textDecoration: item.done ? "line-through" : "none"
-                  }}
-                >
-                  {item.title}
-                </h1>
-                <h1 onClick={() => this.deleteItem(item)}> x </h1>
-              </div>
-            );
-          })}
+          {this.state.tasks.map(item => (
+            <ListItem
+              key={item.id}
+              deleteItem={this.deleteItem}
+              onInput={this.onInput}
+              onSubmit={this.onSubmit}
+              taskDone={this.taskDone}
+              item={item}
+            />
+          ))}
         </div>
       </div>
     );
