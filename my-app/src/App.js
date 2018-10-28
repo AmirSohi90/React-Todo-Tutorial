@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import ListItem from "./Components/ListItem/ListItem";
 import Form from "./Components/Form/Form";
+import NoItemsMessage from "./Components/NoItemsMessage/NoItemsMessage";
 
 class App extends Component {
   constructor() {
@@ -26,11 +27,11 @@ class App extends Component {
 
   calculateId = () => {
     const newId = this.state.tasks.reduce((acc, val) => {
-      acc[0] = acc[0] === undefined || val.id < acc[0] ? val.id : acc[0];
-      acc[1] = acc[1] === undefined || val.id > acc[1] ? val.id : acc[1];
+      // acc[0] = acc[0] === undefined || val.id < acc[0] ? val.id : acc[0];
+      acc = acc === undefined || val.id > acc ? val.id : acc;
       return acc;
     }, []);
-    return newId[1] + 1;
+    return newId + 1;
   };
 
   onSubmit = e => {
@@ -41,7 +42,9 @@ class App extends Component {
       id: this.calculateId()
     };
     const tasks = [...this.state.tasks, newTask];
-    this.setState({ tasks, newItem: { title: "" } });
+    this.setState({ tasks, newItem: { title: "" } }, () =>
+      console.log(this.state.tasks)
+    );
   };
 
   taskDone = item => {
@@ -61,6 +64,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="header">
+          <NoItemsMessage state={this.state} />
           <Form onSubmit={this.onSubmit} onInput={this.onInput} />
           {this.state.tasks.map(item => (
             <ListItem

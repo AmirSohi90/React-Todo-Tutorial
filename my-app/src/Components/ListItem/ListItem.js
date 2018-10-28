@@ -9,7 +9,7 @@ const ListItem = props => (
       }}
     >
       <h1 onClick={() => props.taskDone(props.item)}>{props.item.title}</h1>
-      <h1 onClick={() => props.deleteItem(props.item)}> x </h1>
+      <h1 onClick={() => props.deleteItem(props.item)}>-Delete</h1>
     </li>
   </ul>
 );
