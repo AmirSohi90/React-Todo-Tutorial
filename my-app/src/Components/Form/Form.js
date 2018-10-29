@@ -3,7 +3,7 @@ import React from "react";
 const Form = props => (
   <form onSubmit={e => props.onSubmit(e)}>
     <input placeholder="Task" onChange={props.onInput} />
-    <button type="submit"> Add Task </button>
+    {props.title && <button type="submit"> Add Task </button>}
   </form>
 );
 

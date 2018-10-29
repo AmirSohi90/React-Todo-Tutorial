@@ -33,13 +33,15 @@ class App extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const newTask = {
-      title: this.state.newItem.title,
-      done: false,
-      id: this.calculateId()
-    };
-    const tasks = [...this.state.tasks, newTask];
-    this.setState({ tasks, newItem: { title: "" } });
+    if (this.state.newItem.title) {
+      const newTask = {
+        title: this.state.newItem.title,
+        done: false,
+        id: this.calculateId()
+      };
+      const tasks = [...this.state.tasks, newTask];
+      this.setState({ tasks, newItem: { title: "" } });
+    }
   };
 
   taskDone = item => {
@@ -58,18 +60,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="header">
-          <NoItemsMessage state={this.state} />
-          <Form onSubmit={this.onSubmit} onInput={this.onInput} />
-          {this.state.tasks.map(item => (
-            <ListItem
-              key={item.id}
-              deleteItem={this.deleteItem}
-              taskDone={this.taskDone}
-              item={item}
-            />
-          ))}
-        </div>
+        <NoItemsMessage state={this.state} />
+        <Form
+          onSubmit={this.onSubmit}
+          onInput={this.onInput}
+          title={this.state.newItem.title}
+        />
+        {this.state.tasks.map(item => (
+          <ListItem
+            key={item.id}
+            deleteItem={this.deleteItem}
+            taskDone={this.taskDone}
+            item={item}
+          />
+        ))}
       </div>
     );
   }
